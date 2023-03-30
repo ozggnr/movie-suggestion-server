@@ -5,11 +5,11 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 #This will create and save a user with given credentials
 class UserManager(BaseUserManager):
-    def create_user(self, username, email, password=None, **kwargs):
+    def create_user(self, username, email, password=None):
         if not username:
             raise ValueError('Users must have a username.')
         if not email:
-            raise ValueError('Users must have an email.')
+            raise ValueError('Users must have an email address.')
 
         user = self.model(username=username, email=self.normalize_email(email))
         user.set_password(password)
