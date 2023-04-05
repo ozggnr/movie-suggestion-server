@@ -16,12 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from apps.users.views import UserViewSet
+from apps.users.views import UserViewSet, ObtainTokenPairView, UserCreate
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path(r'admin/', admin.site.urls),
-    path(r'api/', include(router.urls))
+    path(r'api/', include(router.urls)),
+    path(r'api/login/', ObtainTokenPairView.as_view(), name='token_create'),
+    path(r'api/register/', UserCreate.as_view(), name="create_user"),
 ]
